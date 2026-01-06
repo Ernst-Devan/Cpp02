@@ -12,22 +12,22 @@ Fixed::Fixed()
 
 Fixed::Fixed(int val)
 {
-    this->_fixed_point = val * std::pow(Fixed::_fractional, 2);
+    this->_fixed_point = val * std::pow(2, Fixed::_fractional);
 }
 
 int Fixed::toInt(void) const
 {
-    return (this->_fixed_point / std::pow(Fixed::_fractional, 2));
+    return (this->_fixed_point / std::pow(2, Fixed::_fractional));
 }
 
 Fixed::Fixed(float val)
 {
-    this->_fixed_point = roundf(val * std::pow(Fixed::_fractional, 2));
+    this->_fixed_point = roundf(val * std::pow(2, Fixed::_fractional));
 }
 
 float Fixed::toFloat(void) const
 {
-    return (this->_fixed_point / std::pow(Fixed::_fractional, 2));
+    return (this->_fixed_point / (std::pow(2, Fixed::_fractional)));
 }
 
 Fixed::Fixed(const Fixed &f)
@@ -88,14 +88,14 @@ Fixed &Fixed::operator-(const Fixed& f)
 Fixed &Fixed::operator*(const Fixed& f)
 {
     this->_fixed_point = this->getRawBits() * f.getRawBits();
-    this->_fixed_point /= std::pow(Fixed::_fractional, 2);
+    this->_fixed_point /= std::pow(2, Fixed::_fractional);
     return (*this);
 }
 
 Fixed &Fixed::operator/(const Fixed& f)
 {
     this->_fixed_point = this->getRawBits() * f.getRawBits();
-    this->_fixed_point *= std::pow(Fixed::_fractional, 2);
+    this->_fixed_point *= std::pow(2, Fixed::_fractional);
     return (*this);
 }
 
@@ -143,14 +143,14 @@ bool Fixed::operator!=(const Fixed& f) const
 
 Fixed &Fixed::operator++()
 {
-    this->setRawBits(this->getRawBits() + 1);
+    this->_fixed_point++;
     return (*this);
 }
 
 Fixed Fixed::operator++(int)
 {
     Fixed tmp = *this;
-    this->setRawBits(this->getRawBits() + 1);
+    this->_fixed_point++;
     return (tmp);
 }
 
