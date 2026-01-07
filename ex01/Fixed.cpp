@@ -12,28 +12,30 @@ Fixed::Fixed()
 
 Fixed::Fixed(int val)
 {
-    this->_fixed_point = val * std::pow(Fixed::_fractional, 2);
+    std::cout << "Int constructor called" << std::endl;
+    this->_fixed_point = val << _fractional;
 }
 
 int Fixed::toInt(void) const
 {
-    return (this->_fixed_point / std::pow(Fixed::_fractional, 2));
+    return (this->_fixed_point / (1 << _fractional));
 }
 
 Fixed::Fixed(float val)
 {
-    this->_fixed_point = roundf(val * std::pow(Fixed::_fractional, 2));
+    std::cout << "Float constructor called" << std::endl;
+    this->_fixed_point = roundf(val * (1 << _fractional));
 }
 
 float Fixed::toFloat(void) const
 {
-    return (this->_fixed_point / std::pow(Fixed::_fractional, 2));
+    return (this->_fixed_point / static_cast<float>(1 << _fractional));
 }
 
 Fixed::Fixed(const Fixed &f)
 {
     std::cout << "Copy constructor called" << std::endl;
-    this->_fixed_point = f.getRawBits();
+    this->_fixed_point = f._fixed_point;
 }
 
 Fixed &Fixed::operator=(const Fixed& f)
@@ -43,7 +45,7 @@ Fixed &Fixed::operator=(const Fixed& f)
     {
         return (*this);
     }
-    this->_fixed_point = f.getRawBits();
+    this->_fixed_point = f._fixed_point;
     return (*this);
 }
 

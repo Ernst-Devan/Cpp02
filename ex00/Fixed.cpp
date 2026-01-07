@@ -15,18 +15,11 @@ Fixed::Fixed(const Fixed &f)
     this->_fixed_point = f.getRawBits();
 }
 
-Fixed::Fixed(int val)
-{
-
-}
-
 Fixed &Fixed::operator=(const Fixed& f)
 {
     std::cout << "Copy assignment operator called" << std::endl;
     if (this == &f)
-    {
         return (*this);
-    }
     this->_fixed_point = f.getRawBits();
     return (*this);
 }
